@@ -45,6 +45,11 @@ class TenKClass:
             #  Getting the third piece of text. (num results) in this element
             totalResults = tdElement.findAll("font")[2].text
 
+            #  Checking for a huge amount of results
+            if '+' in totalResults:
+                #  Removing + from totalResults ex) 8000+
+                totalResults = totalResults.replace('+','')
+
             #  Returning total results
             return int(totalResults)
 
@@ -138,9 +143,11 @@ class TenKClass:
                 # self.companyInformation[companyName].append(cik)
                 # self.companyInformation[companyName].append(sic)
 
+                #  Take this out
+                if sic in self.sicClassifications.keys():
 
-                #  Appending type of industry to companyInformation list.
-                self.companyInformation[companyName].append(\
+                    #  Appending type of industry to companyInformation list.
+                    self.companyInformation[companyName].append(\
                     'BusinessType: ' + self.sicClassifications[sic])
 
                 #  Calling print function
